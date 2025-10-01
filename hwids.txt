@@ -1,2 +1,2 @@
  # Authorized HWIDs for Mist Client
-
+ B45FFBA3-E157-E711-B753-18602412F4E2
